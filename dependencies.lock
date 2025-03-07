@@ -2,13 +2,13 @@ dependencies:
   espressif/esp_lcd_touch:
     dependencies: []
     source:
-      path: D:\Documents\MyWorkspaces\Waveshare\esp32_lcd\components\espressif__esp_lcd_touch
+      path: D:\Documents\MyWorkspaces\Espressif\esp32_lcd\components\espressif__esp_lcd_touch
       type: local
     version: 1.1.2
   espressif/esp_lcd_touch_gt911:
     dependencies: []
     source:
-      path: D:\Documents\MyWorkspaces\Waveshare\esp32_lcd\components\espressif__esp_lcd_touch_gt911
+      path: D:\Documents\MyWorkspaces\Espressif\esp32_lcd\components\espressif__esp_lcd_touch_gt911
       type: local
     version: 1.1.1~1
   idf:
@@ -18,7 +18,7 @@ dependencies:
   lvgl/lvgl:
     dependencies: []
     source:
-      path: D:\Documents\MyWorkspaces\Waveshare\esp32_lcd\components\lvgl__lvgl
+      path: D:\Documents\MyWorkspaces\Espressif\esp32_lcd\components\lvgl__lvgl
       type: local
     version: 8.4.0
 direct_dependencies:
@@ -26,6 +26,6 @@ direct_dependencies:
 - espressif/esp_lcd_touch_gt911
 - idf
 - lvgl/lvgl
-manifest_hash: d5d266152de678f38563fb78535c96ea22d9ead88642e70bb4e988de7ac24ddd
+manifest_hash: 1ae00376725d4ca1b14c7c5a720ce5a898ec0751d539dd6973e177ad716ff6ef
 target: esp32s3
 version: 2.0.0

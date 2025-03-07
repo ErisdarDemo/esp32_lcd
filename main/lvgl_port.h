@@ -1,21 +1,38 @@
-/*
- * SPDX-FileCopyrightText: 2023-2024 Espressif Systems (Shanghai) CO LTD
- *
- * SPDX-License-Identifier: Apache-2.0
- */
+#ifndef _LVGL_PORT_H_
+#define _LVGL_PORT_H_
 
+//************************************************************************************************//
+//                                             CONFIG                                             //
+//************************************************************************************************//
 #pragma once
-
-#include <stdint.h>
-
-#include "esp_err.h"
-#include "esp_lcd_types.h"
-#include "esp_lcd_touch.h"
-#include "lvgl.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+
+//************************************************************************************************//
+//                                            INCLUDES                                            //
+//************************************************************************************************//
+
+//Standard Library Includes
+#include <stdbool.h>
+#include <stdint.h>
+
+//BSP Includes
+#include "esp_err.h"
+#include "esp_lcd_types.h"
+#include "esp_lcd_touch.h"
+
+//Library Includes
+#include "lvgl.h"
+
+
+//************************************************************************************************//
+//                                        DEFINITIONS & TYPES                                     //
+//************************************************************************************************//
+
+//-----------------------------------------  Definitions -----------------------------------------//
 
 /**
  * LVGL related parameters, can be adjusted by users
@@ -29,12 +46,13 @@ extern "C" {
  * LVGL timer handle task related parameters, can be adjusted by users
  *
  */
-#define LVGL_PORT_TASK_MAX_DELAY_MS (CONFIG_EXAMPLE_LVGL_PORT_TASK_MAX_DELAY_MS)    // The maximum delay of the LVGL timer task, in milliseconds
-#define LVGL_PORT_TASK_MIN_DELAY_MS (CONFIG_EXAMPLE_LVGL_PORT_TASK_MIN_DELAY_MS)    // The minimum delay of the LVGL timer task, in milliseconds
+#define LVGL_PORT_TASK_MAX_DELAY_MS (CONFIG_EXAMPLE_LVGL_PORT_TASK_MAX_DELAY_MS)         // The maximum delay of the LVGL timer task, in milliseconds
+#define LVGL_PORT_TASK_MIN_DELAY_MS (CONFIG_EXAMPLE_LVGL_PORT_TASK_MIN_DELAY_MS)         // The minimum delay of the LVGL timer task, in milliseconds
 #define LVGL_PORT_TASK_STACK_SIZE   (CONFIG_EXAMPLE_LVGL_PORT_TASK_STACK_SIZE_KB * 1024) // The stack size of the LVGL timer task, in bytes
-#define LVGL_PORT_TASK_PRIORITY     (CONFIG_EXAMPLE_LVGL_PORT_TASK_PRIORITY)        // The priority of the LVGL timer task
-#define LVGL_PORT_TASK_CORE         (CONFIG_EXAMPLE_LVGL_PORT_TASK_CORE)            // The core of the LVGL timer task,
+#define LVGL_PORT_TASK_PRIORITY     (CONFIG_EXAMPLE_LVGL_PORT_TASK_PRIORITY)             // The priority of the LVGL timer task
+#define LVGL_PORT_TASK_CORE         (CONFIG_EXAMPLE_LVGL_PORT_TASK_CORE)                 // The core of the LVGL timer task,
 // `-1` means the don't specify the core
+
 /**
  *
  * LVGL buffer related parameters, can be adjusted by users:
@@ -94,10 +112,10 @@ extern "C" {
 #define LVGL_PORT_DIRECT_MODE           (1)
 #endif /* LVGL_PORT_AVOID_TEAR_MODE */
 
-#if EXAMPLE_LVGL_PORT_ROTATION_DEGREE == 0
+#if EXAMPLE_LVGL_PORT_ROTATION_DEGREE   == 0
 #define EXAMPLE_LVGL_PORT_ROTATION_0    (1)
 #else
-#if EXAMPLE_LVGL_PORT_ROTATION_DEGREE == 90
+#if EXAMPLE_LVGL_PORT_ROTATION_DEGREE   == 90
 #define EXAMPLE_LVGL_PORT_ROTATION_90   (1)
 #elif EXAMPLE_LVGL_PORT_ROTATION_DEGREE == 180
 #define EXAMPLE_LVGL_PORT_ROTATION_180  (1)
@@ -115,45 +133,72 @@ extern "C" {
 #define LVGL_PORT_DIRECT_MODE           (0)
 #endif /* LVGL_PORT_AVOID_TEAR_ENABLE */
 
-/**
- * @brief Initialize LVGL port
+
+//************************************************************************************************//
+//                                       FUNCTION DECLARATIONS                                    //
+//************************************************************************************************//
+
+/**************************************************************************************************/
+/** @fcn        esp_err_t lvgl_port_init(esp_lcd_panel_handle_t lcd_handle, esp_lcd_touch_handle_t tp_handle)
+ *  @brief      Initialize LVGL port
+ *  @details    x
  *
- * @param[in] lcd_handle: LCD panel handle
- * @param[in] tp_handle: Touch panel handle
+ *  @param    [in]  (esp_lcd_panel_handle_t) lcd_handle - LCD panel handle
+ *  @param    [in]  (esp_lcd_touch_handle_t) tp_handle - Touch panel handle
  *
- * @return
- *      - ESP_OK: Success
- *      - ESP_ERR_INVALID_ARG: Invalid argument
- *      - Others: Fail
+ *  @return   (esp_err_t) initialization status
+ *              - ESP_OK: Success
+ *            	- ESP_ERR_INVALID_ARG: Invalid argument
+ *      		- Others: Fail
  */
+/**************************************************************************************************/
 esp_err_t lvgl_port_init(esp_lcd_panel_handle_t lcd_handle, esp_lcd_touch_handle_t tp_handle);
 
-/**
- * @brief Take LVGL mutex
+
+/**************************************************************************************************/
+/** @fcn        bool lvgl_port_lock(int timeout_ms)
+ *  @brief      Take LVGL mutex
+ *  @details    x
  *
- * @param[in] timeout_ms: Timeout in [ms]. 0 will block indefinitely.
+ *  @param    [in]  (int) timeout_ms - Timeout in [ms]. 0 will block indefinitely
  *
- * @return
- *      - true:  Mutex was taken
- *      - false: Mutex was NOT taken
+ *  @return   (bool) mutex status
+ *      				- true:  Mutex was taken
+ *      				- false: Mutex was NOT taken
  */
+/**************************************************************************************************/
 bool lvgl_port_lock(int timeout_ms);
 
-/**
- * @brief Give LVGL mutex
- *
+
+/**************************************************************************************************/
+/** @fcn        void lvgl_port_unlock(void)
+ *  @brief      Give LVGL mutex
+ *  @details    x
  */
+/**************************************************************************************************/
 void lvgl_port_unlock(void);
 
-/**
- * @brief Notifies the LVGL task when the transmission of the RGB frame buffer is completed.
+
+/**************************************************************************************************/
+/** @fcn        bool lvgl_port_notify_rgb_vsync(void)
+ *  @brief      Notifies the LVGL task when the transmission of the RGB frame buffer is completed
+ *  @details    x
  *
- * @return
- *      - true:  The tasks need to be re-scheduled
- *      - false: The tasks don't need to be re-scheduled
+ *  @return   (bool) rescheduling status
+ *      				- true:  The tasks need to be re-scheduled
+ *      				- false: The tasks don't need to be re-scheduled
  */
+/**************************************************************************************************/
 bool lvgl_port_notify_rgb_vsync(void);
+
+
+//************************************************************************************************//
+//                                             CONFIG                                             //
+//************************************************************************************************//
 
 #ifdef __cplusplus
 }
 #endif
+
+#endif /* _LVGL_PORT_H_ */
+

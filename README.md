@@ -1,11 +1,14 @@
-| Supported Targets | ESP32-S3 |
-| ----------------- | -------- |
+# ESP32 LCD Demonstration
 
-| Supported LCD Controller    | ST7701 |
-| ----------------------------| -------|
+Waveshare LCD demonstration for ESP32-S3-Touch-LCD-4.3B-Box 
 
-| Supported Touch Controller  |  GT911 |
-| ----------------------------| -------|
+## Components
+
+1. ESP32-S3
+
+2. LCD Controller - ST7701
+
+3. Touch Controller - GT911
 
 # RGB Avoid Tearing Example
 
