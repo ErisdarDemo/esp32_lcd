@@ -36,36 +36,51 @@
 //                                            INCLUDES                                            //
 //************************************************************************************************//
 
+//Standard Library Includes
+#include <stdbool.h>
+
 //Project Includes
 #include "waveshare_rgb_lcd_port.h"
+
+//Constants
+#define MAGIC_NUM_ONE 	(-1)
 
 
 /**************************************************************************************************/
 /** @fcn        void app_main(void)
  *  @brief      x
  *  @details    x
- *
- *	@section 	Opens
- *		unroll lvgl_port_lock()
  */
 /**************************************************************************************************/
 void app_main(void) {
 	
+	//Locals
+	bool ret;										/* LVGL api return value					  */
+	
+	
 	//---------------------------------------- Initialize ----------------------------------------//
     waveshare_esp32_s3_rgb_lcd_init(); 				/* Initialize the Waveshare ESP32-S3 RGB LCD  */
 
+	//Notice
     ESP_LOGI(TAG, "Display LVGL demos");
+
 
     //------------------------------------------ Operate -----------------------------------------//
     
-    // Lock the mutex due to the LVGL APIs are not thread-safe
-    if (lvgl_port_lock(-1)) {
+    //Lock 
+    ret = lvgl_port_lock(MAGIC_NUM_ONE); 	/* LVGL APIs are not thread-safe		  */
+    
+    
+    //Check
+    if(ret == true) {
 
 		//Demo
          lv_demo_music();
 
-        // Release the mutex
+        //Release
         lvgl_port_unlock();
     }
+    
+    return;
 }
 

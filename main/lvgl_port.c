@@ -338,7 +338,7 @@ esp_err_t lvgl_port_init(esp_lcd_panel_handle_t lcd_handle, esp_lcd_touch_handle
  *  @brief      x
  *  @details    x
  
- *  @param    [in]  (int) timeout_ms - x
+ *  @param    [in]  (int) timeout_ms - '1' for MAX_DELAY value
  *
  *  @return   (bool) descrip
  */
@@ -347,9 +347,9 @@ bool lvgl_port_lock(int timeout_ms) {
 	
     assert(lvgl_mux && "lvgl_port_init must be called first"); // Ensure the mutex is initialized
 
-    const TickType_t timeout_ticks = (timeout_ms < 0) ? portMAX_DELAY : pdMS_TO_TICKS(timeout_ms); // Convert timeout to ticks
+    const TickType_t timeout_ticks = (timeout_ms < 0) ? portMAX_DELAY : pdMS_TO_TICKS(timeout_ms);
     
-    return xSemaphoreTakeRecursive(lvgl_mux, timeout_ticks) == pdTRUE; // Try to take the mutex
+    return (xSemaphoreTakeRecursive(lvgl_mux, timeout_ticks) == pdTRUE); /* Try to take mutex     */
 }
 
 
