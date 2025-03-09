@@ -5,14 +5,20 @@
  *
  *  @author   Justin Reina, Firmware Engineer
  *  @created  3/7/25
- *  @last rev 3/7/25
- *
- *
- *  @notes    x
+ *  @last rev 3/9/25
  *
  *  @section    Opens
+ *		relocate demo at root\
  *      switch to Core\ demo model of RTOS
  *		switch music from component to direct source
+ *
+ *	@section 	Demos
+ *		See components\lvgl for alt. demos - 
+ *      - lv_demo_benchmark()
+ *      - lv_demo_benchmark()
+ *      - lv_demo_stress()
+ *      - lv_demo_widgets()
+ *      - example_lvgl_demo_ui()
  *
  *  @section    Legal Disclaimer
  *      © 2025 Justin Reina, All rights reserved. All contents of this source file and/or any other
@@ -38,6 +44,9 @@
 /** @fcn        void app_main(void)
  *  @brief      x
  *  @details    x
+ *
+ *	@section 	Opens
+ *		unroll lvgl_port_lock()
  */
 /**************************************************************************************************/
 void app_main(void) {
@@ -51,11 +60,10 @@ void app_main(void) {
     
     // Lock the mutex due to the LVGL APIs are not thread-safe
     if (lvgl_port_lock(-1)) {
-        // lv_demo_stress();
-        // lv_demo_benchmark();
+
+		//Demo
          lv_demo_music();
-        //lv_demo_widgets();
-        // example_lvgl_demo_ui();
+
         // Release the mutex
         lvgl_port_unlock();
     }
