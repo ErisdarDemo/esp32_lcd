@@ -1,0 +1,20 @@
+####################################################################################################
+ #  @file     CMakeLists.txt
+ #  @brief    Project Description
+ #  @details  x
+ #
+ #  @section    Detail
+ #      Standard cmake components for compile
+ #
+####################################################################################################
+cmake_minimum_required(VERSION 3.16)
+
+# Cmake Source Directories
+set(EXTRA_COMPONENT_DIRS ${CMAKE_CURRENT_LIST_DIR}/../core)
+
+# Root Cmake Config 
+include($ENV{}/tools/cmake/project.cmake)
+
+# PROJECT_NAME
+project(proj_name)
+

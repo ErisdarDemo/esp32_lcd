@@ -1,0 +1,24 @@
+####################################################################################################
+# @brief    core\ CMake Description
+# @src      IDF Progrmming Guide -> Build system -> component CMakeLists.txt 
+#
+# @warn     adding SRC & SRC_DIRS together not recommended
+#
+####################################################################################################
+
+# Build Config
+idf_component_register(
+                       SRC_DIRS
+                         "."
+                         "../lbr"
+                         "mcu"
+                         "rtos"
+                         "system"
+                       INCLUDE_DIRS
+                         "." 
+                         "../lbr"
+                         "mcu"
+                         "rtos"
+                         "system"
+                      )
+
