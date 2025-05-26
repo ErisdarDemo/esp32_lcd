@@ -1,7 +1,7 @@
 /**************************************************************************************************/
 /** @file     main.c
- *  @brief    ESP32 Base C Project Template
- *  @details  For new ESP32 development
+ *  @brief    ESP32 LCD Driver Development
+ *  @details  For test & validation of esp32_lcd.c&h
  *
  *  @author   Justin Reina, Firmware Engineer
  *  @created  4/16/25

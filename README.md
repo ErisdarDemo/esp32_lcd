@@ -1,12 +1,20 @@
-# esp32_base
+# esp32_lcd
 
-ESP32 Base Project for new development
+LCD driver reference for ESP32
 
-## esp32_proj opens
+## Summary
 
-- Espressif-IDE compile/debug (reinstall & stopped working?)
+Used for development & validation of ESP32 LCD driver
 
-- VS Code debug code stepping (JTAG)
+- 
+
+## Hardware
+
+- Current: ESP32-S3
+
+## Source
+
+* [esp32_base](https://github.com/ErisdarDemo/esp32_base/tree/v1) 'v1'
 
 # Project Organization
 
@@ -20,6 +28,11 @@ ESP32 Base Project for new development
 
 - core\system - Application setup & configure
 
+# Opens
+
+- Integrate & capture reference demos & their README content!
+
 # Version History
 
-- v1 - C application development template
+- 
+

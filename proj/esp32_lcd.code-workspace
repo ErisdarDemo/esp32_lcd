@@ -21,7 +21,7 @@
         }
     ],
     "settings": {
-        "window.title": "esp32_base",
+        "window.title": "esp32_lcd",
         "files.associations": {
             "task.h": "c",
             "freertos.h": "c",
